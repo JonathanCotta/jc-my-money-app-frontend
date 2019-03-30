@@ -3,10 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, arrayInsert, arrayRemove } from 'redux-form';
 import Grid from '../common/layout/grid';
+import Select from '../common/form/select';
 import Input from '../common/form/input';
 import If from '../common/operador/if';
 
 class ItemList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            options: [
+                { value: "PAGO", text: "Pago" },
+                { value: "PENDENTE", text: "Pendente" },
+                { value: "AGENDADO", text: "Agendado" }
+            ]
+        }
+    }
 
     add(index, item = {}) {
         if (!this.props.readOnly) {
@@ -21,21 +33,28 @@ class ItemList extends Component {
     }
 
     renderRows() {
-        const list = this.props.list || [];
+        const { field, readOnly, list = [] } = this.props;
+
         return list.map((item, index) => (
             <tr key={index}>
                 <td>
-                    <Field name={`${this.props.field}[${index}].name`} component={Input}
-                        placeholder='Informe o nome' readOnly={this.props.readOnly} />
+                    <Field name={`${field}[${index}].name`} component={Input}
+                        placeholder='Informe o nome' readOnly={readOnly} />
                 </td>
                 <td>
-                    <Field name={`${this.props.field}[${index}].value`} component={Input}
-                        placeholder='Informe o valor' readOnly={this.props.readOnly} />
+                    <Field name={`${field}[${index}].value`} component={Input}
+                        placeholder='Informe o valor' readOnly={readOnly} />
                 </td>
                 <If test={this.props.showStatus}>
                     <td>
-                        <Field name={`${this.props.field}[${index}].status`} component={Input}
-                            placeholder='Informe o status' readOnly={this.props.readOnly} />
+                        <Field
+                            name={`${field}[${index}].status`}
+                            placeholder='Informe o status'
+                            component={Select}
+                            readOnly={readOnly}
+                            options={this.state.options}
+                            defaultValue={item.status}
+                        />
                     </td>
                 </If>
                 <td>
