@@ -27,13 +27,13 @@ class Navbar extends Component {
                             className="dropdown-toggle"
                             data-toggle="dropdown">
                             <img src="http://lorempixel.com/160/160/abstract"
-                                className="user-image" alt="User Image" />
+                                className="user-image" alt="Avatar" />
                             <span className="hidden-xs">{name}</span>
                         </a>
                         <ul className="dropdown-menu">
                             <li className="user-header">
                                 <img src="http://lorempixel.com/160/160/abstract"
-                                    className="img-circle" alt="User Image" />
+                                    className="img-circle" alt="Avatar" />
                                 <p>{name}<small>{email}</small></p>
                             </li>
                             <li className="user-footer">
