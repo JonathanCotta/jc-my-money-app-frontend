@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import ContentHeader from '../common/template/contentHeader';
 import Content from '../common/template/content';
 import ValueBox from '../common/widget/valueBox';
 import Row from '../common/layout/row';
-import consts from '../consts';
 
-// const BASE_URL = 'http://localhost:3003/api'
+import config from '../config';
 
 class Dashboard2 extends Component {
 
@@ -16,7 +16,7 @@ class Dashboard2 extends Component {
     }
 
     componentWillMount(){
-        axios.get(`${consts.API_URL}/billingCycles/summary`)
+        axios.get(`${config.api}/billingCycles/summary`)
             .then( resp => this.setState(resp.data))
     }
 
